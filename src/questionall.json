@@ -1,0 +1,787 @@
+{
+  "items": [
+    {
+      "tags": [
+        "python",
+        "matplotlib",
+        "jupyter-lab"
+      ],
+      "owner": {
+        "reputation": 2896,
+        "user_id": 2826421,
+        "user_type": "registered",
+        "accept_rate": 73,
+        "profile_image": "https://i.stack.imgur.com/digYw.png?s=128&g=1",
+        "display_name": "MrLeeh",
+        "link": "https://stackoverflow.com/users/2826421/mrleeh"
+      },
+      "is_answered": false,
+      "view_count": 1,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746593,
+      "creation_date": 1564746593,
+      "question_id": 57325937,
+      "link": "https://stackoverflow.com/questions/57325937/jupyter-lab-matplotlib-live-plot-is-scaled-awkwardly",
+      "title": "Jupyter Lab: Matplotlib live plot is scaled awkwardly",
+      "body": "<p>I want to implement some live plotting in Jupyter lab using <a href=\"https://github.com/matplotlib/jupyter-matplotlib\" rel=\"nofollow noreferrer\">Jupyter-Matplotlib</a>. Unfortunately the plot is scaled awkwardly during live plotting. You can see the result in the GIF below. Only the upper left corner of the plot is visible.</p>\n\n<p><a href=\"https://i.stack.imgur.com/LHTar.gif\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/LHTar.gif\" alt=\"enter image description here\"></a></p>\n\n<p>The code I used is as follows:</p>\n\n<pre><code>%matplotlib notebook\nfrom matplotlib import pyplot as plt\nimport time\n\nfig = plt.figure()\nax = fig.gca()\ncanvas = fig.canvas\n\na = []\nfor i in range(10):\n    a.append(i)\n    ax.clear()\n    ax.plot(a)\n    canvas.draw()\n    time.sleep(0.5)\n</code></pre>\n\n<p>Does anyone have experience with this kind of issue and knows how to fix it?</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "request",
+        "pycharm",
+        "nas"
+      ],
+      "owner": {
+        "reputation": 3,
+        "user_id": 9175740,
+        "user_type": "registered",
+        "profile_image": "https://lh5.googleusercontent.com/-PWys7Bz-IMo/AAAAAAAAAAI/AAAAAAAAAAc/lODg-UO798I/photo.jpg?sz=128",
+        "display_name": "吴洲洋",
+        "link": "https://stackoverflow.com/users/9175740/%e5%90%b4%e6%b4%b2%e6%b4%8b"
+      },
+      "is_answered": false,
+      "view_count": 11,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746592,
+      "creation_date": 1564730474,
+      "last_edit_date": 1564746592,
+      "question_id": 57321658,
+      "link": "https://stackoverflow.com/questions/57321658/how-to-use-pycrate-to-encode-attach-request-nas-messages",
+      "title": "How to use pycrate to encode Attach Request NAS messages",
+      "body": "<p>I tried to use pycrate to encapsulate the attach request in the LTE NAS message, but it was always unsuccessful. The place where I analyzed the error was the two IEs ESContainer and MSNetCap. The two IEs, ESMContainer and MSNetCap, have been packaged separately, but I don't know how to assign them to the attach request.</p>\n\n<p>System ubuntu 18.04 IDE: pycharm python 3.6 pycrate0.4</p>\n\n<p>input value:</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>        Msg = EMMAttachRequest()\n        Msg.set_val({'EMMHeader': [0, 7, 65]})\n        Msg.set_val({'NAS_KSI': [[0, 7]]})\n        Msg.set_val({'EPSAttachType': [2]})\n        Msg['EPSID'].set_IE(\n            val={'type': 1, 'ident': '1' + decode_bcd(b'\\x01\\x10\\x00\\x00\\x00\\x00\\x10')})\n        Msg['UENetCap'].set_val([4,\n                                 [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0,\n                                  0, 0, 0,\n                                  1, 1, 0,\n                                  0,\n                                  0, 0,\n                                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n                                  0, 0, 0,\n                                  0, 0,\n                                  b'']])\n        PDNConnectivityRequest = ESMPDNConnectivityRequest()\n        PDNConnectivityRequest['ESMHeader'].set_val([0, 2, 1, 208])\n        PDNConnectivityRequest['PDNType'].set_val([3])\n        PDNConnectivityRequest['RequestType'].set_val([1])\n        PDNConnectivityRequest['ProtConfig'].set_trans(False)\n        PDNConnectivityRequest['ProtConfig'].set_val([39, 38, [1, 0, 0, [\n            [32801, 16, [1, 1, 16, [[129, 6, b'\\x00\\x00\\x00\\x00'], [131, 6, b'\\x00\\x00\\x00\\x00']]]], [3, 0, b''],\n            [10, 0, b''], [2, 0, b''], [12, 0, b''], [1, 0, b''], [13, 0, b'']]]])\n        # Msg['ESMContainer'].set_val(vals={'V': PDNConnectivityRequest.to_bytes()})\n        Msg['DRXParam'].set_trans(False)\n        Msg['DRXParam'].set_val([92, [32, 0, 0, 0]])\n        Msg['MSNetCap'].set_trans(False)\n        Msg['MSNetCap'].set_val(\n            {'T': 49, 'V':  [1, 1, 1, 0, 1, 0, 1, 0, [1, 1, 0, 0, 0, 0], 0, 0, 0, 1, 1, 1, 1, 0, 0]})\n        Msg['TMSIStatus'].set_trans(False)\n        Msg['TMSIStatus'].set_val([9, [0, 0]])\n        Msg['MSCm2'].set_trans(False)\n        Msg['MSCm2'].set_val([17, 3, [0, 2, 1, 0, 7, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0]])\n        Msg['MSCm3'].set_trans(False)\n        Msg['MSCm3'].set_val([32, 9,\n                              [0, ['110', [0, 0, 0, 0], 1, 4], ['0'], ['0'], 0, 0, ['0'], ['0'], ['0'], ['0'], ['0'],\n                               ['1', 4], ['1', 1], 1, 0, 0, ['0'], ['0'], ['0'], 0, 1, ['0'], ['0'], '0', 0, 0, 0,\n                               ['0'],\n                               '0', 1, 0, ['0'], 1, ['0'], ['0'], 0, 0, 1, 1, 1, 1, 0, 0, 0, 0]])\n        Msg['SuppCodecs'].set_trans(False)\n        Msg['SuppCodecs'].set_val([64, 8, [[4, 2, b'`\\x00'], [0, 2, b'\\x1f\\x00']]])\n        Msg['VoiceDomPref'].set_trans(False)\n        Msg['VoiceDomPref'].set_val([93, 1, [0, 0, 0]])\n        # print(Msg.show())\n        return Msg.to_bytes()\n\n</code></pre>\n\n<p>success value:</p>\n\n<pre><code>### EMMAttachRequest ###\n ### EMMHeader ###\n  &lt;SecHdr : 0 (No security)&gt;\n  &lt;ProtDisc : 7 (EMM)&gt;\n  &lt;Type : 65 (Attach request)&gt;\n ### NAS_KSI ###\n  ### NAS_KSI ###\n   &lt;TSC : 0 ( native security context)&gt;\n   &lt;Value : 7 (no key available)&gt;\n ### EPSAttachType ###\n  &lt;V : 2 (combined EPS / IMSI attach)&gt;\n ### EPSID ###\n  &lt;L : 8&gt;\n  ### EPSID ###\n   &lt;Digit1 : 0x1&gt;\n   &lt;Odd : 1&gt;\n   &lt;Type : 1 (IMSI)&gt;\n   &lt;Digits : 0x01100000000010&gt;\n ### UENetCap ###\n  &lt;L : 4&gt;\n  ### UENetCap ###\n   &lt;EEA0 : 1&gt;\n   &lt;EEA1_128 : 1&gt;\n   &lt;EEA2_128 : 1&gt;\n   &lt;EEA3_128 : 1&gt;\n   &lt;EEA4 : 0&gt;\n   &lt;EEA5 : 0&gt;\n   &lt;EEA6 : 0&gt;\n   &lt;EEA7 : 0&gt;\n   &lt;EIA0 : 1&gt;\n   &lt;EIA1_128 : 1&gt;\n   &lt;EIA2_128 : 1&gt;\n   &lt;EIA3_128 : 1&gt;\n   &lt;EIA4 : 0&gt;\n   &lt;EIA5 : 0&gt;\n   &lt;EIA6 : 0&gt;\n   &lt;EIA7 : 0&gt;\n   &lt;UEA0 : 1&gt;\n   &lt;UEA1 : 1&gt;\n   &lt;UEA2 : 0&gt;\n   &lt;UEA3 : 0&gt;\n   &lt;UEA4 : 0&gt;\n   &lt;UEA5 : 0&gt;\n   &lt;UEA6 : 0&gt;\n   &lt;UEA7 : 0&gt;\n   &lt;UCS2 : 1&gt;\n   &lt;UIA1 : 1&gt;\n   &lt;UIA2 : 0&gt;\n   &lt;UIA3 : 0&gt;\n   &lt;UIA4 : 0&gt;\n   &lt;UIA5 : 0&gt;00\n   &lt;UIA6 : 0&gt;\n   &lt;UIA7 : 0&gt;\n ### ESMContainer ###\n  &lt;L : 44&gt;\n  ### ESMPDNConnectivityRequest ###\n   ### ESMHeader ###\n    &lt;EPSBearerId : 0&gt;\n    &lt;ProtDisc : 2&gt;\n    &lt;PTI : 1&gt;\n    &lt;Type : 208 (PDN connectivity request)&gt;\n   ### PDNType ###\n    &lt;V : 3 (IPv4v6)&gt;\n   ### RequestType ###\n    &lt;V : 1 (Initial request)&gt;\n   ### ProtConfig ###\n    &lt;T : 39&gt;\n    &lt;L : 38&gt;\n    ### ProtConfig ###\n     &lt;Ext : 1&gt;\n     &lt;spare : 0&gt;\n     &lt;Prot : 0 (PPP with IP PDP)&gt;\n     ### Config ###\n      ### ProtConfigElt ###\n       &lt;ID : 32801 (IPCP)&gt;\n       &lt;Len : 16&gt;\n       ### Cont ###\n        &lt;Code : 1 (Configure-Request)&gt;\n        &lt;Id : 1&gt;\n        &lt;Len : 16&gt;\n        ### Data ###\n         ### NCPOpt ###\n          &lt;Type : 129 (Primary DNS Server Address)&gt;\n          &lt;Len : 6&gt;\n          &lt;Data : 0x00000000&gt;\n         ### NCPOpt ###\n          &lt;Type : 131 (Secondary DNS Server Address)&gt;\n          &lt;Len : 6&gt;\n          &lt;Data : 0x00000000&gt;\n      ### ProtConfigElt ###\n       &lt;ID : 3 (DNS Server IPv6 Address Request)&gt;\n       &lt;Len : 0&gt;\n       &lt;Cont : 0x&gt;\n      ### ProtConfigElt ###\n       &lt;ID : 10 (IP address allocation via NAS signalling)&gt;\n       &lt;Len : 0&gt;\n       &lt;Cont : 0x&gt;\n      ### ProtConfigElt ###\n       &lt;ID : 2 (IM CN Subsystem Signaling Flag)&gt;\n       &lt;Len : 0&gt;\n       &lt;Cont : 0x&gt;\n      ### ProtConfigElt ###\n       &lt;ID : 12 (P-CSCF IPv4 Address)&gt;\n       &lt;Len : 0&gt;\n       &lt;Cont : 0x&gt;\n      ### ProtConfigElt ###\n       &lt;ID : 1 (P-CSCF IPv6 Address Request)&gt;\n       &lt;Len : 0&gt;\n       &lt;Cont : 0x&gt;\n      ### ProtConfigElt ###\n       &lt;ID : 13 (DNS server IPv4 address request)&gt;\n       &lt;Len : 0&gt;\n       &lt;Cont : 0x&gt;\n ### DRXParam ###\n  &lt;T : 92&gt;\n  ### DRXParam ###\n   &lt;SPLIT_PG_CYCLE_CODE : 32&gt;\n   &lt;DRXCycleLen : 0 (DRX not specified by the MS)&gt;\n   &lt;SPLITonCCCH : 0&gt;\n   &lt;NonDRXTimer : 0 (no non-DRX mode after transfer state)&gt;\n ### MSNetCap ###\n  &lt;T : 49&gt;\n  &lt;L : 3&gt;\n  &lt;ms_network_capability_value_part (CSN1List): [\n   &lt;(CSN1Ref): &lt;gea1_bits (CSN1Bit): 1&gt;&gt;\n   &lt;sm_capabilities_via_dedicated_channels (CSN1Bit): 1&gt;\n   &lt;sm_capabilities_via_gprs_channels (CSN1Bit): 1&gt;\n   &lt;ucs2_support (CSN1Bit): 0&gt;\n   &lt;ss_screening_indicator (CSN1Bit): 1&gt;\n   &lt;solsa_capability (CSN1Bit): 0&gt;\n   &lt;revision_level_indicator (CSN1Bit): 1&gt;\n   &lt;pfc_feature_mode (CSN1Bit): 0&gt;\n   &lt;(CSN1Ref): &lt;extended_gea_bits (CSN1List): [\n    &lt;gea_2 (CSN1Bit): 1&gt;\n    &lt;gea_3 (CSN1Bit): 1&gt;\n    &lt;gea_4 (CSN1Bit): 0&gt;\n    &lt;gea_5 (CSN1Bit): 0&gt;\n    &lt;gea_6 (CSN1Bit): 0&gt;\n    &lt;gea_7 (CSN1Bit): 0&gt;]&gt;&gt;\n   &lt;lcs_va_capability (CSN1Bit): 0&gt;\n   &lt;ps_inter_rat_ho_from_geran_to_utran_iu_mode_capability (CSN1Bit): 0&gt;\n   &lt;ps_inter_rat_ho_from_geran_to_e_utran_s1_mode_capability (CSN1Bit): 0&gt;\n   &lt;emm_combined_procedures_capability (CSN1Bit): 1&gt;\n   &lt;isr_support (CSN1Bit): 1&gt;\n   &lt;srvcc_to_geran_utran_capability (CSN1Bit): 1&gt;\n   &lt;epc_capability (CSN1Bit): 1&gt;\n   &lt;nf_capability (CSN1Bit): 0&gt;\n   &lt;geran_network_sharing_capability (CSN1Bit): 0&gt;]&gt;\n ### TMSIStatus ###\n  &lt;T : 9&gt;\n  ### TMSIStatus ###\n   &lt;spare : 0&gt;\n   &lt;Flag : 0 (no valid TMSI available)&gt;\n ### MSCm2 ###\n  &lt;T : 17&gt;\n  &lt;L : 3&gt;\n  ### MSCm2 ###\n   &lt;spare : 0&gt;\n   &lt;RevLevel : 2 (MS supporting R99 or later)&gt;\n   &lt;EarlyCmCap : 1&gt;\n   &lt;NoA51 : 0&gt;\n   &lt;RFClass : 7&gt;\n   &lt;spare : 0&gt;\n   &lt;PSCap : 1&gt;\n   &lt;SSScreeningCap : 1 (capability of handling of ellipsis notation and phase 2 error handling)&gt;\n   &lt;MTSMSCap : 1&gt;\n   &lt;VBSNotifCap : 0&gt;\n   &lt;VGCSNotifCap : 0&gt;\n   &lt;FCFreqCap : 0&gt;\n   &lt;MSCm3Cap : 1&gt;\n   &lt;spare : 0&gt;\n   &lt;LCSVACap : 0&gt;\n   &lt;UCS2 : 0&gt;\n   &lt;SoLSACap : 0&gt;\n   &lt;CMServPrompt : 1&gt;\n   &lt;A53 : 1&gt;\n   &lt;A52 : 0&gt;\n ### MSCm3 ###\n  &lt;T : 32&gt;\n  &lt;L : 9&gt;\n  &lt;classmark_3_value_part (CSN1List): [\n   &lt;(CSN1Ref): &lt;spare_bit (CSN1Bit): 0&gt;&gt;\n   &lt;(CSN1Alt): { 110 (multiband_supported) : [\n    &lt;(CSN1Ref): &lt;a5_bits (CSN1List): [\n     &lt;a5_7 (CSN1Bit): 0&gt;\n     &lt;a5_6 (CSN1Bit): 0&gt;\n     &lt;a5_5 (CSN1Bit): 0&gt;\n     &lt;a5_4 (CSN1Bit): 0&gt;]&gt;&gt;\n    &lt;associated_radio_capability_2 (CSN1Bit): 1&gt;\n    &lt;associated_radio_capability_1 (CSN1Bit): 4&gt;]}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;ucs2_treatment (CSN1Bit): 0&gt;\n   &lt;extended_measurement_capability (CSN1Bit): 0&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 1 : [\n    &lt;gsm_850_associated_radio_capability (CSN1Bit): 4&gt;]}&gt;\n   &lt;(CSN1Alt): { 1 : [\n    &lt;gsm_1900_associated_radio_capability (CSN1Bit): 1&gt;]}&gt;\n   &lt;umts_fdd_radio_access_technology_capability (CSN1Bit): 1&gt;\n   &lt;umts_3_84_mcps_tdd_radio_access_technology_capability (CSN1Bit): 0&gt;\n   &lt;cdma_2000_radio_access_technology_capability (CSN1Bit): 0&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;umts_1_28_mcps_tdd_radio_access_technology_capability (CSN1Bit): 0&gt;\n   &lt;geran_feature_package_1 (CSN1Bit): 1&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Val): 0&gt;\n   &lt;geran_feature_package_2 (CSN1Bit): 0&gt;\n   &lt;gmsk_multislot_power_profile (CSN1Bit): 0&gt;\n   &lt;_8_psk_multislot_power_profile (CSN1Bit): 0&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Val): 0&gt;\n   &lt;downlink_advanced_receiver_performance (CSN1Bit): 1&gt;\n   &lt;dtm_enhancements_capability (CSN1Bit): 0&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;repeated_acch_capability (CSN1Bit): 1&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;ciphering_mode_setting_capability (CSN1Bit): 0&gt;\n   &lt;additional_positioning_capabilities (CSN1Bit): 0&gt;\n   &lt;e_utra_fdd_support (CSN1Bit): 1&gt;\n   &lt;e_utra_tdd_support (CSN1Bit): 1&gt;\n   &lt;e_utra_measurement_and_reporting_support (CSN1Bit): 1&gt;\n   &lt;priority_based_reselection_support (CSN1Bit): 1&gt;\n   &lt;utra_csg_cells_reporting (CSN1Bit): 0&gt;\n   &lt;vamos_level (CSN1Bit): 0&gt;\n   &lt;tighter_capability (CSN1Bit): 0&gt;\n   &lt;selective_ciphering_of_downlink_sacch (CSN1Bit): 0&gt;]&gt;\n ### SuppCodecs ###\n  &lt;T : 64&gt;\n  &lt;L : 8&gt;\n  ### SuppCodecList ###\n   ### SuppCodec ###\n    &lt;SysID : 4&gt;\n    &lt;BMLen : 2&gt;\n    &lt;CodecBM : 0b0110000000000000&gt;\n   ### SuppCodec ###\n    &lt;SysID : 0&gt;\n    &lt;BMLen : 2&gt;\n    &lt;CodecBM : 0b0001111100000000&gt;\n ### VoiceDomPref ###\n  &lt;T : 93&gt;\n  &lt;L : 1&gt;\n  ### VoiceDomPref ###\n   &lt;spare : 0&gt;\n   &lt;UEUsage : 0 (Voice centric)&gt;\n   &lt;VoiceDomPref : 0 (CS Voice only)&gt;\n</code></pre>\n\n<p>my output value</p>\n\n<pre class=\"lang-py prettyprint-override\"><code>charpy(b'\\x00\\x03\\x00\\x00\\x00\\\\ \\x001\\x03\\xe5`&lt;\\x90\\x11\\x03WX\\x86 \\t`\\x14\\x00R0 \\x02C\\xc0@\\x08\\x04\\x02`\\x00\\x00\\x02\\x1f\\x00]\\x01\\x00')\nEMMAttachRequest, _dec_unk_ie: unknown Type4TLV IE, T: 0x0, V: 0x\ncharpy(b'\\x00\\x00\\x00\\\\ \\x001\\x03\\xe5`&lt;\\x90\\x11\\x03WX\\x86 \\t`\\x14\\x00R0 \\x02C\\xc0@\\x08\\x04\\x02`\\x00\\x00\\x02\\x1f\\x00]\\x01\\x00')\nEMMAttachRequest, _dec_unk_ie: unknown Type4TLV IE, T: 0x3, V: 0x\ncharpy(b'\\x00\\\\ \\x001\\x03\\xe5`&lt;\\x90\\x11\\x03WX\\x86 \\t`\\x14\\x00R0 \\x02C\\xc0@\\x08\\x04\\x02`\\x00\\x00\\x02\\x1f\\x00]\\x01\\x00')\nEMMAttachRequest, _dec_unk_ie: unknown Type4TLV IE, T: 0x0, V: 0x\n### EMMAttachRequest ###\n ### EMMHeader ###\n  &lt;SecHdr : 0 (No security)&gt;\n  &lt;ProtDisc : 7 (EMM)&gt;\n  &lt;Type : 65 (Attach request)&gt;\n ### NAS_KSI ###\n  ### NAS_KSI ###\n   &lt;TSC : 0 ( native security context)&gt;\n   &lt;Value : 7 (no key available)&gt;\n ### EPSAttachType ###\n  &lt;V : 2 (combined EPS / IMSI attach)&gt;\n ### EPSID ###\n  &lt;L : 8&gt;\n  ### EPSID ###\n   &lt;Digit1 : 0x1&gt;\n   &lt;Odd : 1&gt;\n   &lt;Type : 1 (IMSI)&gt;\n   &lt;Digits : 0x01100000000010&gt;\n ### UENetCap ###\n  &lt;L : 4&gt;\n  ### UENetCap ###\n   &lt;EEA0 : 1&gt;\n   &lt;EEA1_128 : 1&gt;\n   &lt;EEA2_128 : 1&gt;\n   &lt;EEA3_128 : 1&gt;\n   &lt;EEA4 : 0&gt;\n   &lt;EEA5 : 0&gt;\n   &lt;EEA6 : 0&gt;\n   &lt;EEA7 : 0&gt;\n   &lt;EIA0 : 1&gt;\n   &lt;EIA1_128 : 1&gt;\n   &lt;EIA2_128 : 1&gt;\n   &lt;EIA3_128 : 1&gt;\n   &lt;EIA4 : 0&gt;\n   &lt;EIA5 : 0&gt;\n   &lt;EIA6 : 0&gt;\n   &lt;EIA7 : 0&gt;\n   &lt;UEA0 : 1&gt;\n   &lt;UEA1 : 1&gt;\n   &lt;UEA2 : 0&gt;\n   &lt;UEA3 : 0&gt;\n   &lt;UEA4 : 0&gt;\n   &lt;UEA5 : 0&gt;\n   &lt;UEA6 : 0&gt;\n   &lt;UEA7 : 0&gt;\n   &lt;UCS2 : 1&gt;\n   &lt;UIA1 : 1&gt;\n   &lt;UIA2 : 0&gt;\n   &lt;UIA3 : 0&gt;\n   &lt;UIA4 : 0&gt;\n   &lt;UIA5 : 0&gt;\n   &lt;UIA6 : 0&gt;\n   &lt;UIA7 : 0&gt;\n ### ESMContainer ###\n  &lt;L : 0&gt;\n  &lt;V : 0x&gt;\n ### DRXParam ###\n  &lt;T : 92&gt;\n  ### DRXParam ###\n   &lt;SPLIT_PG_CYCLE_CODE : 32&gt;\n   &lt;DRXCycleLen : 0 (DRX not specified by the MS)&gt;\n   &lt;SPLITonCCCH : 0&gt;\n   &lt;NonDRXTimer : 0 (no non-DRX mode after transfer state)&gt;\n ### MSNetCap ###\n  &lt;T : 49&gt;\n  &lt;L : 3&gt;\n  &lt;ms_network_capability_value_part (CSN1List): [\n   &lt;(CSN1Ref): &lt;gea1_bits (CSN1Bit): 1&gt;&gt;\n   &lt;sm_capabilities_via_dedicated_channels (CSN1Bit): 1&gt;\n   &lt;sm_capabilities_via_gprs_channels (CSN1Bit): 1&gt;\n   &lt;ucs2_support (CSN1Bit): 0&gt;\n   &lt;ss_screening_indicator (CSN1Bit): 1&gt;\n   &lt;solsa_capability (CSN1Bit): 0&gt;\n   &lt;revision_level_indicator (CSN1Bit): 1&gt;\n   &lt;pfc_feature_mode (CSN1Bit): 0&gt;\n   &lt;(CSN1Ref): &lt;extended_gea_bits (CSN1List): [\n    &lt;gea_2 (CSN1Bit): 1&gt;\n    &lt;gea_3 (CSN1Bit): 1&gt;\n    &lt;gea_4 (CSN1Bit): 0&gt;\n    &lt;gea_5 (CSN1Bit): 0&gt;\n    &lt;gea_6 (CSN1Bit): 0&gt;\n    &lt;gea_7 (CSN1Bit): 0&gt;]&gt;&gt;\n   &lt;lcs_va_capability (CSN1Bit): 0&gt;\n   &lt;ps_inter_rat_ho_from_geran_to_utran_iu_mode_capability (CSN1Bit): 0&gt;\n   &lt;ps_inter_rat_ho_from_geran_to_e_utran_s1_mode_capability (CSN1Bit): 0&gt;\n   &lt;emm_combined_procedures_capability (CSN1Bit): 1&gt;\n   &lt;isr_support (CSN1Bit): 1&gt;\n   &lt;srvcc_to_geran_utran_capability (CSN1Bit): 1&gt;\n   &lt;epc_capability (CSN1Bit): 1&gt;\n   &lt;nf_capability (CSN1Bit): 0&gt;\n   &lt;geran_network_sharing_capability (CSN1Bit): 0&gt;]&gt;\n ### TMSIStatus ###\n  &lt;T : 9&gt;\n  ### TMSIStatus ###\n   &lt;spare : 0&gt;\n   &lt;Flag : 0 (no valid TMSI available)&gt;\n ### MSCm2 ###\n  &lt;T : 17&gt;\n  &lt;L : 3&gt;\n  ### MSCm2 ###\n   &lt;spare : 0&gt;\n   &lt;RevLevel : 2 (MS supporting R99 or later)&gt;\n   &lt;EarlyCmCap : 1&gt;\n   &lt;NoA51 : 0&gt;\n   &lt;RFClass : 7&gt;\n   &lt;spare : 0&gt;\n   &lt;PSCap : 1&gt;\n   &lt;SSScreeningCap : 1 (capability of handling of ellipsis notation and phase 2 error handling)&gt;\n   &lt;MTSMSCap : 1&gt;\n   &lt;VBSNotifCap : 0&gt;\n   &lt;VGCSNotifCap : 0&gt;\n   &lt;FCFreqCap : 0&gt;\n   &lt;MSCm3Cap : 1&gt;\n   &lt;spare : 0&gt;\n   &lt;LCSVACap : 0&gt;\n   &lt;UCS2 : 0&gt;\n   &lt;SoLSACap : 0&gt;\n   &lt;CMServPrompt : 1&gt;\n   &lt;A53 : 1&gt;\n   &lt;A52 : 0&gt;\n ### MSCm3 ###\n  &lt;T : 32&gt;\n  &lt;L : 9&gt;\n  &lt;classmark_3_value_part (CSN1List): [\n   &lt;(CSN1Ref): &lt;spare_bit (CSN1Bit): 0&gt;&gt;\n   &lt;(CSN1Alt): { 110 (multiband_supported) : [\n    &lt;(CSN1Ref): &lt;a5_bits (CSN1List): [\n     &lt;a5_7 (CSN1Bit): 0&gt;\n     &lt;a5_6 (CSN1Bit): 0&gt;\n     &lt;a5_5 (CSN1Bit): 0&gt;\n     &lt;a5_4 (CSN1Bit): 0&gt;]&gt;&gt;\n    &lt;associated_radio_capability_2 (CSN1Bit): 1&gt;\n    &lt;associated_radio_capability_1 (CSN1Bit): 4&gt;]}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;ucs2_treatment (CSN1Bit): 0&gt;\n   &lt;extended_measurement_capability (CSN1Bit): 0&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 1 : [\n    &lt;gsm_850_associated_radio_capability (CSN1Bit): 4&gt;]}&gt;\n   &lt;(CSN1Alt): { 1 : [\n    &lt;gsm_1900_associated_radio_capability (CSN1Bit): 1&gt;]}&gt;\n   &lt;umts_fdd_radio_access_technology_capability (CSN1Bit): 1&gt;\n   &lt;umts_3_84_mcps_tdd_radio_access_technology_capability (CSN1Bit): 0&gt;\n   &lt;cdma_2000_radio_access_technology_capability (CSN1Bit): 0&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;umts_1_28_mcps_tdd_radio_access_technology_capability (CSN1Bit): 0&gt;\n   &lt;geran_feature_package_1 (CSN1Bit): 1&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Val): 0&gt;\n   &lt;geran_feature_package_2 (CSN1Bit): 0&gt;\n   &lt;gmsk_multislot_power_profile (CSN1Bit): 0&gt;\n   &lt;_8_psk_multislot_power_profile (CSN1Bit): 0&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Val): 0&gt;\n   &lt;downlink_advanced_receiver_performance (CSN1Bit): 1&gt;\n   &lt;dtm_enhancements_capability (CSN1Bit): 0&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;repeated_acch_capability (CSN1Bit): 1&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;(CSN1Alt): { 0 : []}&gt;\n   &lt;ciphering_mode_setting_capability (CSN1Bit): 0&gt;\n   &lt;additional_positioning_capabilities (CSN1Bit): 0&gt;\n   &lt;e_utra_fdd_support (CSN1Bit): 1&gt;\n   &lt;e_utra_tdd_support (CSN1Bit): 1&gt;\n   &lt;e_utra_measurement_and_reporting_support (CSN1Bit): 1&gt;\n   &lt;priority_based_reselection_support (CSN1Bit): 1&gt;\n   &lt;utra_csg_cells_reporting (CSN1Bit): 0&gt;\n   &lt;vamos_level (CSN1Bit): 0&gt;\n   &lt;tighter_capability (CSN1Bit): 0&gt;\n   &lt;selective_ciphering_of_downlink_sacch (CSN1Bit): 0&gt;]&gt;\n ### SuppCodecs ###\n  &lt;T : 64&gt;\n  &lt;L : 8&gt;\n  ### SuppCodecList ###\n   ### SuppCodec ###\n    &lt;SysID : 4&gt;\n    &lt;BMLen : 2&gt;\n    &lt;CodecBM : 0b0110000000000000&gt;\n   ### SuppCodec ###\n    &lt;SysID : 0&gt;\n    &lt;BMLen : 2&gt;\n    &lt;CodecBM : 0b0001111100000000&gt;\n ### VoiceDomPref ###\n  &lt;T : 93&gt;\n  &lt;L : 1&gt;\n  ### VoiceDomPref ###\n   &lt;spare : 0&gt;\n   &lt;UEUsage : 0 (Voice centric)&gt;\n   &lt;VoiceDomPref : 0 (CS Voice only)&gt;\n\n</code></pre>\n"
+    },
+    {
+      "tags": [
+        "javascript",
+        "google-apps-script",
+        "google-sheets",
+        "google-sheets-api"
+      ],
+      "owner": {
+        "reputation": 1,
+        "user_id": 11873201,
+        "user_type": "registered",
+        "profile_image": "https://lh3.googleusercontent.com/-POBquWfo6jw/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfXfL7w54MwHDt1R0eU9NpntrzaLg/photo.jpg?sz=128",
+        "display_name": "Ahan Sahu",
+        "link": "https://stackoverflow.com/users/11873201/ahan-sahu"
+      },
+      "is_answered": false,
+      "view_count": 21,
+      "answer_count": 1,
+      "score": 0,
+      "last_activity_date": 1564746591,
+      "creation_date": 1564736544,
+      "question_id": 57323180,
+      "link": "https://stackoverflow.com/questions/57323180/google-sheets-script-getting-values-from-each-range-in-a-rangelist-in-the-same",
+      "title": "Google Sheets Script: Getting values from each range in a rangelist in the same variable",
+      "body": "<p>I'm trying to get ranges from two different parts of the sheet and get their values to paste onto another sheet. The method I'm using works for the first range but not the next. I need values from both ranges to remain in the same variable since I need to filter it later.</p>\n\n<pre><code>var fromsh = SpreadsheetApp.openById(id).getSheetByName(\"Sheet1\");\n  var fromval = fromsh.getRangeList(['A3170:O', 'Y3170:Y']).getRanges()\n  var values = [];\n  for(var i = 0; i &lt; fromval.length; i++){\n    values = [].concat(values, fromval[i].getValues());\n  }\n  tosh = SpreadsheetApp.openById(id).getSheetByName(\"Sheet1\");\n  tosh.getRange(1, 1, values.length, values[0].length).setValues(values);\n</code></pre>\n\n<p>The error shown is: \nThe number of columns in the data does not match the number of columns in the range. The data has 1 but the range has 15.</p>\n"
+    },
+    {
+      "tags": [
+        "javascript",
+        "reactjs"
+      ],
+      "owner": {
+        "reputation": 3,
+        "user_id": 9925809,
+        "user_type": "registered",
+        "profile_image": "https://graph.facebook.com/1522334917895952/picture?type=large",
+        "display_name": "Dansiecrown",
+        "link": "https://stackoverflow.com/users/9925809/dansiecrown"
+      },
+      "is_answered": false,
+      "view_count": 1,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746591,
+      "creation_date": 1564746591,
+      "question_id": 57325936,
+      "link": "https://stackoverflow.com/questions/57325936/how-to-fix-cannot-read-property-map-of-undefine-in-react-native",
+      "title": "How to fix &quot;cannot read property &#39;map&#39; of undefine&quot; in react native",
+      "body": "<p>I'm passing a map to all my posts variable so that all my posts can appear as a single post, but it kept bringing up the error</p>\n\n<p>I have tried solving it using the Reactjs Documentation from the react website, it shows almost the same code as mine.</p>\n\n<pre><code>import PropTypes from 'prop-types';\nimport PostItem from './PostItem';\n\nclass PostFeed extends Component {\n  render() {\n    const { posts }  = this.props;\n    const list = posts.map((post) =&gt; &lt;PostItem \n            key={post._id} \n            posts={post}\n\n        /&gt;);\n    return (\n\n        {list}\n\n  );\n  }\n}\n\nPostFeed.propTypes = {\n  posts: PropTypes.array.isRequired\n};\n\nexport default PostFeed; ```\n\nI expect every posts to appear as a single post from the ```postItem``` component[enter image description here][1]\n\n\n  [1]: https://i.stack.imgur.com/W9l9m.png\n</code></pre>\n"
+    },
+    {
+      "tags": [
+        "angular6",
+        "angular8"
+      ],
+      "owner": {
+        "reputation": 3,
+        "user_id": 6071612,
+        "user_type": "registered",
+        "profile_image": "https://lh5.googleusercontent.com/-iy_xN1QvOi0/AAAAAAAAAAI/AAAAAAAAAKs/5ZZN6FAplVw/photo.jpg?sz=128",
+        "display_name": "dnyaneshwar suryawanshi",
+        "link": "https://stackoverflow.com/users/6071612/dnyaneshwar-suryawanshi"
+      },
+      "is_answered": false,
+      "view_count": 1,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746590,
+      "creation_date": 1564746590,
+      "question_id": 57325935,
+      "link": "https://stackoverflow.com/questions/57325935/dropdown-for-region-language-of-countries-with-flag",
+      "title": "Dropdown for region language of countries with flag",
+      "body": "<p>I have created project in angular8 and  I want to make my UI dynamically generated based on countries languages.SO i want to create dropdown countries languages with country flag.Please help on this.</p>\n"
+    },
+    {
+      "tags": [
+        "javascript",
+        "vue.js",
+        "vuejs2"
+      ],
+      "owner": {
+        "reputation": 1,
+        "user_id": 11873810,
+        "user_type": "registered",
+        "profile_image": "https://www.gravatar.com/avatar/d54ec11605756dbd3b58b51c32841a28?s=128&d=identicon&r=PG&f=1",
+        "display_name": "Markus",
+        "link": "https://stackoverflow.com/users/11873810/markus"
+      },
+      "is_answered": false,
+      "view_count": 21,
+      "answer_count": 3,
+      "score": 0,
+      "last_activity_date": 1564746583,
+      "creation_date": 1564745168,
+      "last_edit_date": 1564745612,
+      "question_id": 57325569,
+      "link": "https://stackoverflow.com/questions/57325569/filtering-computed-properties",
+      "title": "Filtering Computed Properties",
+      "body": "<p>I'm working on a list. There you can add and remove elements from it and specify the count of each added element.</p>\n\n<p>I included all Elements to my data\nExample: </p>\n\n<pre><code>[\n  {\n    \"rowID\": \"21\",\n    \"rowAnzahl\": 1,\n    \"elementID\": \"127\",\n    \"elementName\": \"Element 4\"\n  },\n  {\n    \"rowID\": \"22\",\n    \"rowAnzahl\": 1,\n    \"elementID\": \"109\",\n    \"elementName\": \"Element 3\"\n  },\n  {\n    \"rowID\": \"\",\n    \"rowAnzahl\": \"\",\n    \"elementID\": \"106\",\n    \"elementName\": \"Element 1\"\n  },\n  {\n    \"rowID\": \"\",\n    \"rowAnzahl\": \"\",\n    \"elementID\": \"112\",\n    \"elementName\": \"Element 2\"\n  }\n]\n</code></pre>\n\n<p>then i added two computed Properties:</p>\n\n<pre><code>elements: function() {\n      return this.testData.filter(function(e) {\n        return e.rowID\n      })\n    },\n    unusedElements: function() {\n      return this.testData.filter(function(e) {\n        return !e.rowID\n      })\n    },\n</code></pre>\n\n<p>then i have these methods:</p>\n\n<pre><code>methods: {\n    addElement: function(index) {\n      var item = this.testData[index];\n      item.rowID = 'new' + this.rowCount++;\n      item.rowAnzahl = 1;\n    },\n    removeElement: function(index) {\n      var item = this.testData[index];\n      item.rowID = '';\n      item.rowAnzahl = '';\n    }\n  },\n</code></pre>\n\n<p>But now my Problem:</p>\n\n<p>The Index begins at 0 for my properties unusedElements and elements… \nBut because I need the index number for adding or removing the Element this doesn't work.\nIs it possible to filter the method by my elementID? \nOr can I set the elementID as index number? </p>\n\n<p>Thanks!</p>\n"
+    },
+    {
+      "tags": [
+        "c#",
+        "sql-server",
+        "xml",
+        "entity-framework-6",
+        "ef-migrations"
+      ],
+      "owner": {
+        "reputation": 1477,
+        "user_id": 5159468,
+        "user_type": "registered",
+        "accept_rate": 66,
+        "profile_image": "https://www.gravatar.com/avatar/86086694fbbab3ad73702b411fdaca1f?s=128&d=identicon&r=PG&f=1",
+        "display_name": "Spikee",
+        "link": "https://stackoverflow.com/users/5159468/spikee"
+      },
+      "is_answered": false,
+      "view_count": 12,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746583,
+      "creation_date": 1564739706,
+      "last_edit_date": 1564746583,
+      "question_id": 57324083,
+      "link": "https://stackoverflow.com/questions/57324083/how-to-update-nvarcharmax-field-to-xml-datatype-using-ef6-migrations-for-data",
+      "title": "How to update nvarchar(max) field to XML datatype using EF6 migrations, for data optimization",
+      "body": "<p><strong>Background</strong></p>\n\n<p>I have a service running that reads XML output from an API, provided by a supplier of ours. It's an xml that can be of varying file size.</p>\n\n<p>I'm using EF6 code-first migrations, via attribute mapping, to generate the database. The entity is defined like this:</p>\n\n<pre><code>[Table(\"DataUploadEvents\")]\npublic class DataUploadEvent\n{\n    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]\n    [Key]\n    public Guid Id { get; set; }\n    public string Filename { get; set; }\n    public string RawData { get; set; }\n    public DateTime CreateDateTime { get; set; }\n}\n</code></pre>\n\n<p>As-is the raw xml data is stored, but when querying the data is truncated, even though the files aren't really that large (not even close to the 2 GB limit of <code>nvarchar(max)</code>). Files larger than 2 MB are rare.</p>\n\n<p>I can set my Sql Server Management Studio client to <a href=\"https://www.mssqltips.com/sqlservertip/2795/prevent-truncation-of-dynamically-generated-results-in-sql-server-management-studio/\" rel=\"nofollow noreferrer\">not truncate result sets</a>, but that's likely not what I want (not performant).</p>\n\n<p><strong>What I tried</strong></p>\n\n<p>I tried changing the RawData field to type XElement and XDocument, but then I get this error on adding a new migration:</p>\n\n<blockquote>\n  <p>EntityType 'XElement' has no key defined. Define the key for this\n  EntityType.</p>\n</blockquote>\n\n<p><strong>Question</strong></p>\n\n<blockquote>\n  <p>What do I need to do to ensure that my RawData field is changed to SQL\n  XML DataType?</p>\n</blockquote>\n\n<p><strong>Update</strong> </p>\n\n<p>If I cast my RawData field to xml datatype:</p>\n\n<pre><code>SELECT CAST([RawData] as xml) FROM [DataUploadEvents]\n</code></pre>\n\n<p>I <em>do</em> get the full xml content. So as suspected the data isn't truncated on write, but on read.</p>\n"
+    },
+    {
+      "tags": [
+        "r",
+        "optimization"
+      ],
+      "owner": {
+        "reputation": 11035,
+        "user_id": 1686814,
+        "user_type": "registered",
+        "accept_rate": 79,
+        "profile_image": "https://i.stack.imgur.com/WJgTB.jpg?s=128&g=1",
+        "display_name": "January",
+        "link": "https://stackoverflow.com/users/1686814/january"
+      },
+      "is_answered": false,
+      "view_count": 53,
+      "answer_count": 1,
+      "score": 0,
+      "last_activity_date": 1564746581,
+      "creation_date": 1564654193,
+      "question_id": 57306672,
+      "link": "https://stackoverflow.com/questions/57306672/optimizing-a-function-in-r",
+      "title": "Optimizing a function in R",
+      "body": "<p>Let M be a list of character vectors of strings from a set called G, and P and Q are matrices with rows corresponding to each element of G:</p>\n\n<pre><code>M &lt;- list(a=sample(LETTERS, 10), b=sample(LETTERS, 5), \n          c=sample(LETTERS, 15), d=sample(LETTERS, 8))\nG &lt;- LETTERS\nNcol &lt;- 5\nP &lt;- matrix(rnorm(length(G) * Ncol), ncol=Ncol)\nQ &lt;- matrix(rnorm(length(G) * Ncol), ncol=Ncol)\nrownames(P) &lt;- rownames(Q) &lt;- G\n</code></pre>\n\n<p>Let t_p and t_q be arbitrary thresholds:</p>\n\n<pre><code>t_p &lt;- 0.5\nt_q &lt;- -0.5\n</code></pre>\n\n<p>For each element <code>m</code> of M, and each number i = 1…Ncol I would like to know how many of the values in P and Q fulfill one of the following conditions:</p>\n\n<ul>\n<li>both P[,i] and Q[,i] are smaller than t_p and t_q, respectively</li>\n<li>both P[,i] and Q[,i] are larger than t_p and t_q, respectively</li>\n<li>none of the above</li>\n</ul>\n\n<p>In other words, for the element <code>m &lt;- \"a\"</code> and <code>i &lt;- 1</code> I need the following numbers:</p>\n\n<pre><code>i &lt;- 1\nm &lt;- \"a\"\nn1 &lt;- sum(P[ M[[m]] %in% G, i ] &lt; t_p &amp; Q[ M[[m]] %in% G, i ] &lt; t_q)\nn2 &lt;- sum(P[ M[[m]] %in% G, i ] &gt; t_p &amp; Q[ M[[m]] %in% G, i ] &gt; t_q)\n</code></pre>\n\n<p>(the third number is trivially derived by subtracting <code>n1 + n2</code> from <code>length(M[[m]])</code>).</p>\n\n<p>The result should be a list with an element for each column i of P and Q, being a matrix with a row for each element of M and three columns corresponding to the numbers mentioned above.</p>\n\n<p>Here is how I solved this problem:</p>\n\n<pre><code>Pl1 &lt;- P &gt; t_p\nPl2 &lt;- P &lt; t_p\nQl1 &lt;- Q &gt; t_q\nQl2 &lt;- Q &lt; t_q\ncond1 &lt;- Pl1 &amp; Ql1\ncond2 &lt;- Pl2 &amp; Ql2\n\n## given m, calculate for each column i\ncalc_for_m &lt;- function(m) {\n  sel &lt;- G %in% m\n  Nsel &lt;- length(m)\n  sel.cond1 &lt;- cond1[sel, ]\n  res.cond1 &lt;- colSums(sel.cond1)\n  sel.cond2 &lt;- cond2[sel, ]\n  res.cond2 &lt;- colSums(sel.cond2)\n  cbind(cond1=res.cond1, cond2=res.cond2, \n       cond3=Nsel - (res.cond1 + res.cond2))\n}\n\nYl &lt;- lapply(M, calc_for_m)\nYl &lt;- simplify2array(Yl)\nres &lt;- lapply(1:Ncol, function(i) t(Yl[i,,]))\n</code></pre>\n\n<p>However, given that in real world case G is a set of tens to hundreds of thousands items, M is a list of length of thousands with each element being a vector of thousands, the above solution appears to be somewhat on the slow side. Is there a better (more elegant and faster) way of solving this problem?</p>\n"
+    },
+    {
+      "tags": [
+        "junit",
+        "h2",
+        "jooq"
+      ],
+      "owner": {
+        "reputation": 20,
+        "user_id": 7755644,
+        "user_type": "registered",
+        "profile_image": "https://lh6.googleusercontent.com/-GyeZetgLY08/AAAAAAAAAAI/AAAAAAAAAe0/XJhFMzuc7k4/photo.jpg?sz=128",
+        "display_name": "Mohit Sharma",
+        "link": "https://stackoverflow.com/users/7755644/mohit-sharma"
+      },
+      "is_answered": false,
+      "view_count": 2,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746573,
+      "creation_date": 1564746573,
+      "question_id": 57325932,
+      "link": "https://stackoverflow.com/questions/57325932/org-jooq-exception-detachedexception-cannot-execute-query-no-connection-config",
+      "title": "org.jooq.exception.DetachedException: Cannot execute query. No Connection configured",
+      "body": "<p>I have jOOQ (3.11.11) + H2 + Spring app, in which I am trying to run a simple JUnit test for persistence, but failing to do so with exceptions.</p>\n\n<p>Here is my <code>application.properties</code> file:</p>\n\n<pre><code>spring.datasource.url=jdbc:h2:mem:jooq-test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL\nspring.datasource.platform=h2\nspring.datasource.username = sa\nspring.datasource.password =\n</code></pre>\n\n<p>And my test config class as:</p>\n\n<pre><code>@Configuration\npublic class DummyTestConfig {\n    @Bean\n    public DSLContext dsl() {\n        return DSL.using(SQLDialect.H2);\n    }\n}\n</code></pre>\n\n<p>And my test case:</p>\n\n<pre><code>public class JooqRepositoryImplTest {\n\n    @MockBean\n    private PlatformCache platformCache;\n\n    @Autowired\n    private JooqRepositoryImpl JooqRepository;\n\n    private List&lt;Entity&gt; getDummyEntityList() {\n        List&lt;Entity&gt; data = new ArrayList&lt;&gt;();\n        for (int i = 0; i &lt; 15; i++) {\n            data.add(getDummyEntity());\n        }\n        return data;\n    }\n\n    private Entity getDummyEntity() {\n        final Entity entity = new Entity();\n        entity.setCapacity(150);\n        return entity;\n    }\n\n    @Test\n    public void testDatabaseIsUp() {\n        assert(1 == JooqRepository.count());\n    }\n\n    @Test\n    public void testReplace() {\n        JooqRepository.getEntitiesByJDBC(124, \"C\", DirectionEnum.I, TrafficBucketEnum.D);\n    }\n\n    @Test\n    public void testSave() {\n        final List&lt;Entity&gt; data = getDummyEntityList();\n        JooqRepository.batchSaveByJDBC(data);\n    }\n}\n</code></pre>\n\n<p>And my repository implementation:</p>\n\n<pre><code>@Repository\npublic class JooqRepositoryImpl implements CustomRepository {\n\n    @Autowired\n    private DSLContext dslContext;\n\n    public int count() {\n        return dslContext.fetchCount(MyTable.MY_TABLE);\n    }\n\n    @Transactional\n    @Override\n    public void batchSaveByJDBC(List&lt;Entity&gt; entities) {\n        dslContext.batchInsert(entities.parallelStream().map(convertEntityToRecord()).collect(Collectors.toList()));\n    }\n\n    private Function&lt;Entity, Record&gt; convertEntityToRecord() {\n        return entity -&gt;  {\n            final Record record = new Record();\n            record.setCapacity(entity.getCapacity());\n            return record;\n        };\n    }\n\n    @Override\n    public void batchReplaceByJDBC(List&lt;Entity&gt; entities) {\n        executeReplace(MyTable.MY_TABLE, entities.toArray());\n    }\n\n    public int executeReplace(Table&lt;Record&gt; table, Object[] values) {\n        return dslContext.execute(\"replace into {0} ({1}) values ({2})\",\n                table,\n                dslContext.informationSchema(table).getColumns(),\n                DSL.list(Stream.of(values).map(DSL::val).collect(Collectors.toList()))\n        );\n    }\n\n    @Override\n    public void batchUpdateByJDBC(List&lt;Entity&gt; entities,\n                                  LegRoutingTO leg) {\n        dslContext.batchUpdate(entities.parallelStream().map(convertEntityToRecord()).collect(Collectors.toList()));\n    }\n\n    @Override\n    public void batchUpdateByJDBCPartial (\n            List&lt;Entity&gt; entities, LegRoutingTO leg) {\n        final Batch updates = dslContext.batch(\n                entities.parallelStream().map(convertEntityToRecord()).map(convertRecordToQuery()).collect(Collectors.toList()));\n        updates.execute();\n    }\n\n    private Function&lt;Record, Query&gt; convertRecordToQuery() {\n        return record -&gt; {\n            final UpdateQuery&lt;Record&gt; query = dslContext.updateQuery(MyTable.MY_TABLE);\n            query.setRecord(record);\n            return query;\n        };\n    }\n\n    private Function&lt;Record, Entity&gt; convertRecordToEntity() {\n        return record -&gt; {\n            final Entity entity = new Entity();\n            BeanUtils.copyProperties(record, entity);\n            return entity;\n        };\n    }\n\n}\n</code></pre>\n\n<p>When I try to run test cases, one of them passes (testBatchInsert) and the other two fail with following stacktrace:</p>\n\n<pre><code>\norg.jooq.exception.DetachedException: Cannot execute query. No Connection configured\n\n    at org.jooq_3.11.11.H2.debug(Unknown Source)\n    at org.jooq.impl.AbstractQuery.execute(AbstractQuery.java:319)\n    at org.jooq.impl.AbstractResultQuery.fetchLazy(AbstractResultQuery.java:393)\n    at org.jooq.impl.AbstractResultQuery.fetchLazy(AbstractResultQuery.java:380)\n    at org.jooq.impl.AbstractResultQuery.fetchStream(AbstractResultQuery.java:351)\n    at org.jooq.impl.SelectImpl.fetchStream(SelectImpl.java:2716)\n    at com.xxxx.repository.implementation.JooqRepositoryImpl.getEntitiesByJDBC(JooqRepositoryImpl.java:159)\n    at com.xxxx.repository.implementation.JooqRepositoryImpl$$FastClassBySpringCGLIB$$8ff9f08.invoke(&lt;generated&gt;)\n    at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)\n    at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:684)\n    at com.xxxx.repository.implementation.JooqRepositoryImpl$$EnhancerBySpringCGLIB$$923a185d.getEntitiesByJDBC(&lt;generated&gt;)\n    at com.xxxx.repository.implementation.JooqRepositoryImplTest.testReplace(JooqRepositoryImplTest.java:126)\n    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n    at java.lang.reflect.Method.invoke(Method.java:498)\n    at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)\n    at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)\n    at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)\n    at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)\n    at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)\n    at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)\n    at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)\n    at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)\n    at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252)\n    at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)\n    at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n    at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n    at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n    at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n    at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n    at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)\n    at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)\n    at org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n    at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)\n    at org.junit.runner.JUnitCore.run(JUnitCore.java:137)\n    at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)\n    at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)\n    at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)\n    at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)\n    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n    at java.lang.reflect.Method.invoke(Method.java:498)\n    at com.intellij.rt.execution.CommandLineWrapper.main(CommandLineWrapper.java:66)\n</code></pre>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "web-scraping",
+        "twitter",
+        "sentiment-analysis"
+      ],
+      "owner": {
+        "reputation": 1,
+        "user_id": 10642433,
+        "user_type": "registered",
+        "profile_image": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=128",
+        "display_name": "Sam Johnson",
+        "link": "https://stackoverflow.com/users/10642433/sam-johnson"
+      },
+      "is_answered": false,
+      "view_count": 33,
+      "answer_count": 1,
+      "score": -2,
+      "last_activity_date": 1564746572,
+      "creation_date": 1564703087,
+      "last_edit_date": 1564746572,
+      "question_id": 57318289,
+      "link": "https://stackoverflow.com/questions/57318289/how-do-i-print-tweets-from-twitter",
+      "title": "How do I print tweets from twitter?",
+      "body": "<p>I am trying to scrape tweets from twitter for a side project. </p>\n\n<p>Having difficulty with outputs.</p>\n\n<p>Using latest version of pycharm. </p>\n\n<pre class=\"lang-py prettyprint-override\"><code>import urllib\nimport urllib.request\nfrom bs4 import BeautifulSoup\n\ntheurl = \"https://twitter.com/search?q=ghana%20and%20jollof&amp;src=typed_query\"\nthepage = urllib.request.urlopen(theurl)\n\n\nsoup = BeautifulSoup(thepage, \"html.parser\")\ni = 1\nfor tweets in soup.findAll('div', {\n    \"class\": \"css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0\"\n}):\n    print (i)\n    print (tweets.find('span').text)\n    i = i+1\n    print(tweets)\n</code></pre>\n\n<p>I do not receive any errors at all but there no outputs for the tweets.</p>\n"
+    },
+    {
+      "tags": [
+        "windows",
+        "batch-file",
+        "cmd",
+        "registry"
+      ],
+      "owner": {
+        "reputation": 35,
+        "user_id": 8274700,
+        "user_type": "registered",
+        "accept_rate": 50,
+        "profile_image": "https://www.gravatar.com/avatar/7d959eac9ba02cb4718e9912dd6fd890?s=128&d=identicon&r=PG&f=1",
+        "display_name": "John",
+        "link": "https://stackoverflow.com/users/8274700/john"
+      },
+      "is_answered": false,
+      "view_count": 944,
+      "answer_count": 2,
+      "score": 0,
+      "last_activity_date": 1564746572,
+      "creation_date": 1499513085,
+      "last_edit_date": 1499514535,
+      "question_id": 44985682,
+      "link": "https://stackoverflow.com/questions/44985682/how-do-i-change-mouse-settings-in-my-batch-script",
+      "title": "How do I change mouse settings in my batch script?",
+      "body": "<p>I'm trying to make a script that changes my mouse settings in the registry. When I run the script I see that the changes are made, but they won't be taken into effect unless I log out and log back in, which is not feasible.</p>\n\n<pre><code>:: MouseSensitivity                     10\n:: MouseSpeed (Set Pointer Precision)   0\n:: MouseThreshold1                      0\n:: MouseThreshold2                      0\n\n@ECHO OFF\n\nREG ADD \"HKEY_CURRENT_USER\\Control Panel\\Mouse\" /v MouseSensitivity /t REG_SZ /d 10 /f\nREG ADD \"HKEY_CURRENT_USER\\Control Panel\\Mouse\" /v MouseSpeed /t REG_SZ /d 0 /f\nREG ADD \"HKEY_CURRENT_USER\\Control Panel\\Mouse\" /v MouseThreshold1 /t REG_SZ /d 0 /f\nREG ADD \"HKEY_CURRENT_USER\\Control Panel\\Mouse\" /v MouseThreshold2 /t REG_SZ /d 0 /f\n\nECHO Execution logged on: %DATE% at %TIME% &gt;&gt; test.txt\n\n:: /* Tried this, doesn't work.\n:: RUNDLL32.EXE USER32.DLL, UpdatePerUserSystemParameters\n:: */\n\n@EXIT /B 0\n</code></pre>\n"
+    },
+    {
+      "tags": [
+        "c#",
+        "ms-word",
+        "office-interop"
+      ],
+      "owner": {
+        "reputation": 18,
+        "user_id": 8939789,
+        "user_type": "registered",
+        "profile_image": "https://www.gravatar.com/avatar/97ca1ee144c0f1b1ae6e7eaf393990f8?s=128&d=identicon&r=PG&f=1",
+        "display_name": "Jorge Alonso",
+        "link": "https://stackoverflow.com/users/8939789/jorge-alonso"
+      },
+      "is_answered": false,
+      "view_count": 15,
+      "answer_count": 1,
+      "score": 0,
+      "last_activity_date": 1564746566,
+      "creation_date": 1564735973,
+      "last_edit_date": 1564741677,
+      "question_id": 57323006,
+      "link": "https://stackoverflow.com/questions/57323006/how-can-i-merge-two-cells-in-the-same-column-in-a-table",
+      "title": "How can I merge two cells in the same column in a table",
+      "body": "<p>I´m creating a table with <code>Interop Word</code>. I want to merge two cells in the same column: </p>\n\n<pre><code>        table.Rows[2].Cells[7].Merge(table.Rows[3].Cells[7]);\n        table.Rows[2].Cells[8].Merge(table.Rows[3].Cells[8]);\n</code></pre>\n\n<p>The first line works fine, but in the second, I get this error:</p>\n\n<blockquote>\n  <p>System.Runtime.InteropServices.COMException (0x800A1767): No se puede obtener acceso a determinadas filas de este conjunto porque la tabla tiene celdas combinadas verticalmente.\n     en Microsoft.Office.Interop.Word.Rows.get_Item(Int32 Index)</p>\n</blockquote>\n\n<p>What´s the problem?</p>\n\n<pre><code>        table.Rows[2].Cells[7].Merge(table.Rows[3].Cells[7]);\n        table.Rows[2].Cells[8].Merge(table.Rows[3].Cells[8]);\n</code></pre>\n\n<p>The first line, merge the cell(2,7) and cell(3,7) correctly.\nIn the second line, I get this error:</p>\n\n<blockquote>\n  <p>System.Runtime.InteropServices.COMException (0x800A1767): No se puede obtener acceso a determinadas filas de este conjunto porque la tabla tiene celdas combinadas verticalmente.\n     en Microsoft.Office.Interop.Word.Rows.get_Item(Int32 Index)</p>\n</blockquote>\n"
+    },
+    {
+      "tags": [
+        "vba",
+        "loops",
+        "ms-access",
+        "import"
+      ],
+      "owner": {
+        "reputation": 10,
+        "user_id": 6748745,
+        "user_type": "registered",
+        "profile_image": "https://lh6.googleusercontent.com/-H6iY9VY_s6g/AAAAAAAAAAI/AAAAAAAABoI/aVtclW53oT0/photo.jpg?sz=128",
+        "display_name": "Greg Williams",
+        "link": "https://stackoverflow.com/users/6748745/greg-williams"
+      },
+      "is_answered": false,
+      "view_count": 42,
+      "answer_count": 1,
+      "score": -1,
+      "last_activity_date": 1564746565,
+      "creation_date": 1564495980,
+      "last_edit_date": 1564595837,
+      "question_id": 57273764,
+      "link": "https://stackoverflow.com/questions/57273764/loop-through-folder-importing-all-excel-files-into-access-table",
+      "title": "Loop through folder importing all Excel files into Access table",
+      "body": "<p>I am trying to import all Excel files (500+) in a subfolder into a single Access table. I have searched both here and on Google for possible solutions and have found a few but for whatever reason I cannot get them to work (the code runs with no errors but nothing is imported).</p>\n\n<p>Here is <a href=\"https://access-programmers.co.uk/forums/showthread.php?t=285629\" rel=\"nofollow noreferrer\">a link</a> of the simplest form of code that I have found that should work but as I stated earlier on my computer nothing is being imported.</p>\n\n<pre><code>Function Import_Excel()\nDim myfile\nDim mypath\n\nmypath = \"C:\\Users\\gregory.williams2\\Desktop\\Project Babelfish\\PLOGs\\\"\nmyfile = Dir(mypath &amp; \"*.xlsx\")\n\nDo While myfile &lt;&gt; \"\"\n  If myfile Like \"*.xlsx\" Then\n    DoCmd.TransferSpreadsheet acImport, , \"BabelfishImport\", mypath &amp; myfile, True, \"Babelfish!A1:BR100\"\n\nElse\n\n    Name mypath &amp; myfile As mypath &amp; myfile\nEnd If\n  myfile = Dir()\nLoop\n\n\nEnd Function\n</code></pre>\n\n<p>The end result is to have a specific sheet within all of these workbooks imported into a single table. Thanks for you help in advance!</p>\n"
+    },
+    {
+      "tags": [
+        "sql-server"
+      ],
+      "owner": {
+        "reputation": 45,
+        "user_id": 3129097,
+        "user_type": "registered",
+        "accept_rate": 0,
+        "profile_image": "https://www.gravatar.com/avatar/5bf44b2ce449be88cf932361ffedcaee?s=128&d=identicon&r=PG&f=1",
+        "display_name": "user3129097",
+        "link": "https://stackoverflow.com/users/3129097/user3129097"
+      },
+      "is_answered": false,
+      "view_count": 2,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746561,
+      "creation_date": 1564746561,
+      "question_id": 57325930,
+      "link": "https://stackoverflow.com/questions/57325930/how-two-precision-of-decimal-are-giving-different-result",
+      "title": "how two precision of decimal are giving different result?",
+      "body": "<p>The output of the following query has many cols, the f,g,h are same and i col is different, please tell me why and how?</p>\n\n<pre><code>declare @t decimal(13,4) =0.0001\n,@q decimal(13,4) =999999999.9999\n,@w decimal(13,4) =10.0000\n\nselect \n\n@t a\n,@q b,\n(@t/@q) c ,\ncast(@t as decimal(38,29)) d,\ncast(@q as decimal(38,29)) e ,\ncast((@t/@q) as decimal(38,29)) as f ,\ncast(@t/ cast(@q as decimal(38,4)) as decimal(38,29)) g ,\ncast(cast(@t as decimal(38,29))/ @q as decimal(38,29))  h,\ncast(@t/ cast(@q as decimal(38,29)) as decimal(38,29))  i\n</code></pre>\n\n<p>--Output\na   b   c   d\n    e   f   g   h   i\n0.0001  999999999.9999  0.000000000000100000    0.00010000000000000000000000000 999999999.99990000000000000000000000000 0.00000000000010000000000000000 0.00000000000010000000000000000 0.00000000000010000000000000000 0.00000000000000000000000000000</p>\n\n<p>yours sincerley</p>\n"
+    },
+    {
+      "tags": [
+        "google-sheets"
+      ],
+      "owner": {
+        "reputation": 1,
+        "user_id": 11873928,
+        "user_type": "registered",
+        "profile_image": "https://lh5.googleusercontent.com/-oTTQExUhc-A/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfV_CLUmKh2ABwXBbIrNSJ2-xFNSw/photo.jpg?sz=128",
+        "display_name": "Eduardo Ordonez",
+        "link": "https://stackoverflow.com/users/11873928/eduardo-ordonez"
+      },
+      "is_answered": false,
+      "view_count": 2,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746560,
+      "creation_date": 1564746560,
+      "question_id": 57325929,
+      "link": "https://stackoverflow.com/questions/57325929/make-today-formula-stop-when-checkbox-is-clicked",
+      "title": "Make Today() formula stop when checkbox is clicked",
+      "body": "<p>I'm setting up a Google Sheet with a few columns to be filled for a certain request. So, I included a checkbox to be clicked at the end as a confirmation the request is done. My idea is to have an automated column called 'Request Date' automatically filled with the current date as soon as the Confirmation checkbox is clicked. However, can't use TODAY() formula once it's going to change the date every day. Any solution for this?</p>\n"
+    },
+    {
+      "tags": [
+        "python",
+        "django",
+        "django-models"
+      ],
+      "owner": {
+        "reputation": 4736,
+        "user_id": 76900,
+        "user_type": "registered",
+        "accept_rate": 70,
+        "profile_image": "https://www.gravatar.com/avatar/c84a878bf7946b8903f83595142540e1?s=128&d=identicon&r=PG",
+        "display_name": "Alexander Ljungberg",
+        "link": "https://stackoverflow.com/users/76900/alexander-ljungberg"
+      },
+      "is_answered": true,
+      "view_count": 55215,
+      "accepted_answer_id": 1117587,
+      "answer_count": 8,
+      "score": 92,
+      "last_activity_date": 1564746556,
+      "creation_date": 1247454315,
+      "question_id": 1117564,
+      "link": "https://stackoverflow.com/questions/1117564/set-django-integerfield-by-choices-name",
+      "title": "Set Django IntegerField by choices=... name",
+      "body": "<p>When you have a model field with a choices option you tend to have some magic values associated with human readable names. Is there in Django a convenient way to set these fields by the human readable name instead of the value?</p>\n\n<p>Consider this model:</p>\n\n<pre><code>class Thing(models.Model):\n  PRIORITIES = (\n    (0, 'Low'),\n    (1, 'Normal'),\n    (2, 'High'),\n  )\n\n  priority = models.IntegerField(default=0, choices=PRIORITIES)\n</code></pre>\n\n<p>At some point we have a Thing instance and we want to set its priority. Obviously you could do,</p>\n\n<pre><code>thing.priority = 1\n</code></pre>\n\n<p>But that forces you to memorize the Value-Name mapping of PRIORITIES. This doesn't work:</p>\n\n<pre><code>thing.priority = 'Normal' # Throws ValueError on .save()\n</code></pre>\n\n<p>Currently I have this silly workaround:</p>\n\n<pre><code>thing.priority = dict((key,value) for (value,key) in Thing.PRIORITIES)['Normal']\n</code></pre>\n\n<p>but that's clunky. Given how common this scenario could be I was wondering if anyone had a better solution. Is there some field method for setting fields by choice name which I totally overlooked?</p>\n"
+    },
+    {
+      "tags": [
+        "jquery",
+        "html",
+        "validation",
+        "input",
+        "event-handling"
+      ],
+      "owner": {
+        "reputation": 1,
+        "user_id": 10853302,
+        "user_type": "registered",
+        "profile_image": "https://www.gravatar.com/avatar/6f456800302138fa68465873896f9f41?s=128&d=identicon&r=PG&f=1",
+        "display_name": "sparkle",
+        "link": "https://stackoverflow.com/users/10853302/sparkle"
+      },
+      "is_answered": false,
+      "view_count": 2,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746554,
+      "creation_date": 1564746554,
+      "question_id": 57325928,
+      "link": "https://stackoverflow.com/questions/57325928/input-value-retrived-always-0-and-prevents-form-validation",
+      "title": "Input value retrived always 0 and prevents form validation",
+      "body": "<p>I have to validate a form using Jquery as part of my assignment due this Sunday. I need to detect if a field is empty and prevent form entry while also putting an error message in a div with id \"divMessage\". I would like to do it dynamically but noticed the value I retrieve for a field is always zero. I don't know what to do and am panicking. If I can get this bit of logic right, I can do the rest of my assignment fine on my own. </p>\n\n<p>Tried to validate value of input text field (example of one field, \"username\", given below) with $(\"username).val() but the outcome is always 0 . I 'm at a loss. I have simplified my form below to make it less confusing to troubleshoot. </p>\n\n<pre><code>&lt;head&gt;\n    &lt;meta charset=\"UTF-8\"&gt;\n    &lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"&gt;\n    &lt;meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\"&gt;\n    &lt;title&gt;Add Movie Form&lt;/title&gt;\n&lt;script src=\"https://code.jquery.com/jquery-3.4.1.min.js\"&gt;&lt;/script&gt;\n&lt;script&gt;\n   $(document).ready(function () {\n            var name = $(\"#username\").val()\n            error_username= false;\n\n            // Prevention of form submission \n            $(\"#addMovieform\").submit(function () {\n                  if (error_username=false){\n                    return false;\n                  } else {return true;\n                  }\n            });\n\n           //Dynamically add errorMessage in divMessage \n            $(\"#username\").focusout(function () {\n                if (name.length == 0) {\n                    errorList.append(\"&lt;li&gt;Your name is required&lt;/li&gt;\")\n                    $(\"li\").eq(0).attr(\"class\", \"name_error_1\");\n                } else {\n                    // Remove error message when name has been typed\n                    $(\".name_error_1\").remove()\n                }\n            })\n\n    });\n\n&lt;script&gt;\n&lt;body&gt;\n &lt;div id=\"divMessage\"&gt;&lt;/div&gt;\n        &lt;table id=\"formtable\"&gt;\n\n            &lt;colgroup&gt;\n                &lt;col style=\"width: 20%;\"&gt;\n            &lt;/colgroup&gt;\n            &lt;form action=\"/action_page.php\" id=\"addMovieform\" method=\"POST\"&gt;\n\n                &lt;!-- Username --&gt;\n                &lt;tr&gt;\n                    &lt;td&gt;&lt;label for=\"username\"&gt;Name&lt;/label&gt;&lt;/td&gt;\n                    &lt;td&gt;&lt;input type=\"text\" name=\"movie-username\"id=\"username\" \n                  placeholder=\"Your Name\"&gt;&lt;/td&gt;\n                &lt;/tr&gt;\n              &lt;/form&gt;\n         &lt;/table&gt;\n&lt;/body&gt;\n&lt;/head&gt;\n</code></pre>\n\n<p>Hope to dynamically insert a bullet point with message in \"divMessage\" when username field is empty and then remove bullet point when username field is no longer empty.</p>\n"
+    },
+    {
+      "tags": [
+        "twitter-bootstrap-3"
+      ],
+      "owner": {
+        "reputation": 1,
+        "user_id": 11873842,
+        "user_type": "registered",
+        "profile_image": "https://lh6.googleusercontent.com/-AIviKTsGeaA/AAAAAAAAAAI/AAAAAAAABAQ/e9cIHgYbre8/photo.jpg?sz=128",
+        "display_name": "Phil Jones",
+        "link": "https://stackoverflow.com/users/11873842/phil-jones"
+      },
+      "is_answered": false,
+      "view_count": 14,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746553,
+      "creation_date": 1564745565,
+      "last_edit_date": 1564746553,
+      "question_id": 57325682,
+      "link": "https://stackoverflow.com/questions/57325682/bootstrap-dissapearing-tab-fix-closes-all-active-tabs",
+      "title": "Bootstrap dissapearing tab fix closes all active tabs",
+      "body": "<p>I am using the code from a previous answer provided at <a href=\"https://stackoverflow.com/questions/35186082/bootstrap-tabs-disappear-after-clicking-onto-another-tab\">Bootstrap tabs disappear after clicking onto another tab</a></p>\n\n<p>Here's that snippet:</p>\n\n<p><div class=\"snippet\" data-lang=\"js\" data-hide=\"false\" data-console=\"true\" data-babel=\"false\">\r\n<div class=\"snippet-code\">\r\n<pre class=\"snippet-code-js lang-js prettyprint-override\"><code>    $(document).off('click.tab.data-api');\r\n    $(document).on('click.tab.data-api', '[data-toggle=\"tab\"]', function (e) {\r\n        e.preventDefault();\r\n        var tab = $($(this).attr('href'));\r\n        var activate = !tab.hasClass('active');\r\n        $('div.tab-content&gt;div.tab-pane.active').removeClass('active');\r\n        $('ul.nav.nav-tabs&gt;li.active').removeClass('active');\r\n        if (activate) {\r\n            $(this).tab('show')\r\n        }\r\n    });</code></pre>\r\n</div>\r\n</div>\r\n</p>\n\n<p>It works correctly, however, I have 4 separate tab sections on my page and now clicking any tab closes ALL 4 'active' tabs and breaks page format.</p>\n\n<p>Is there a workaround that will target the tab sections individually?</p>\n"
+    },
+    {
+      "tags": [
+        "visual-studio-2017",
+        "visual-studio-extensions",
+        "visual-studio-2019",
+        "single-file-generator"
+      ],
+      "owner": {
+        "reputation": 1740,
+        "user_id": 284765,
+        "user_type": "registered",
+        "accept_rate": 89,
+        "profile_image": "https://www.gravatar.com/avatar/fdc3c22260f75b14bfeb4746a5f4b20e?s=128&d=identicon&r=PG",
+        "display_name": "Cameron Peters",
+        "link": "https://stackoverflow.com/users/284765/cameron-peters"
+      },
+      "is_answered": false,
+      "view_count": 5,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746552,
+      "creation_date": 1564740244,
+      "last_edit_date": 1564746552,
+      "question_id": 57324230,
+      "link": "https://stackoverflow.com/questions/57324230/singlefilegenerator-run-custom-tool-does-not-run-for-new-vs2017-project-type",
+      "title": "SingleFileGenerator / Run Custom Tool does not run for new vs2017 project type &quot;9A19103F-16F7-4668-BE54-9A1E7A4F7556&quot;",
+      "body": "<p>I have a SingleFileGenerator that works correctly for old-style Visual Studio C# projects, but not at all for the new-style VS2017 C# projects. I've added the new guid to registration attributes and to the packagedef, but still no joy.  For reference, this code generator acts on xml files with the extension .3schema, which is an xml file of our own invention...</p>\n\n<pre><code>[Guid(\"0BC6C7FE-28F7-4A64-A8F8-714FFC0F8FB4\")]\n[PackageRegistration(UseManagedResourcesOnly = true)]\n[InstalledProductRegistration(\"TrilogySchemaGenerator\", \"Trilogy C# Schema Generator\", \"5.9\")]\n[CodeGeneratorRegistration(typeof(TrilogySchemaGenerator), \"Trilogy C# Schema Generator\", \"{9A19103F-16F7-4668-BE54-9A1E7A4F7556}\", GeneratesDesignTimeSource = true)]\n[CodeGeneratorRegistration(typeof(TrilogySchemaGenerator), \"Trilogy C# Schema Generator\", vsContextGuids.vsContextGuidVCSProject, GeneratesDesignTimeSource = true)]\n[ProvideObject(typeof(TrilogySchemaGenerator))]\npublic class TrilogySchemaGenerator : BaseCodeGeneratorWithValidation // base class implements IVsSingleFileGenerator\n{\n     …\n}\n</code></pre>\n\n<p>And the pkgdef:</p>\n\n<pre><code>[$RootKey$\\Generators\\{FAE04EC1-301F-11d3-BF4B-00C04F79EFBC}\\.3schema]\n@=\"TrilogySchemaGenerator\"\n\n[$RootKey$\\Generators\\{9A19103F-16F7-4668-BE54-9A1E7A4F7556}\\.3schema]\n@=\"TrilogySchemaGenerator\"\n</code></pre>\n\n<p>What step am I missing?  Is there an additional registration required?  Ideas of other things to try?</p>\n"
+    },
+    {
+      "tags": [
+        "ios",
+        "objective-c",
+        "xcode",
+        "afnetworking"
+      ],
+      "owner": {
+        "reputation": 2170,
+        "user_id": 865332,
+        "user_type": "registered",
+        "accept_rate": 63,
+        "profile_image": "https://www.gravatar.com/avatar/70fcdf45d7c5894af1a7836483da3b20?s=128&d=identicon&r=PG",
+        "display_name": "iPhone",
+        "link": "https://stackoverflow.com/users/865332/iphone"
+      },
+      "is_answered": false,
+      "view_count": 4,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746551,
+      "creation_date": 1564745245,
+      "last_edit_date": 1564746551,
+      "question_id": 57325598,
+      "link": "https://stackoverflow.com/questions/57325598/facing-afnetworking-errors-after-upgrading-xcode-to-version-10-2",
+      "title": "Facing AFNetworking Errors after upgrading xcode to version 10.2",
+      "body": "<p>Today, I upgraded my xcode version from 10.1 to version 10.2. In xcode 10.1 my project was working fine but after upgrading it to 10.2 I am facing following errors. I am using pods to integrate library in my project. The pod versions are as follows:</p>\n\n<blockquote>\n  <p>pod 'AFOAuth2Manager', '3.0.0'</p>\n  \n  <p>pod 'AFNetworking+streaming', '1.0.2'</p>\n</blockquote>\n\n<p>I checked on cocoapods and both libraries are of latest versions.</p>\n\n<p><a href=\"https://i.stack.imgur.com/xQ9Y4.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/xQ9Y4.png\" alt=\"enter image description here\"></a><a href=\"https://i.stack.imgur.com/RluLt.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/RluLt.png\" alt=\"enter image description here\"></a></p>\n\n<p><a href=\"https://i.stack.imgur.com/thXti.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/thXti.png\" alt=\"enter image description here\"></a></p>\n\n<p><a href=\"https://i.stack.imgur.com/upzoN.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/upzoN.png\" alt=\"enter image description here\"></a></p>\n"
+    },
+    {
+      "tags": [
+        "javascript",
+        "class",
+        "oop",
+        "inheritance",
+        "multiple-inheritance"
+      ],
+      "owner": {
+        "reputation": 1743,
+        "user_id": 6727914,
+        "user_type": "registered",
+        "accept_rate": 52,
+        "profile_image": "https://www.gravatar.com/avatar/b7f29798cfe9f453fc1bd5162a950a1c?s=128&d=identicon&r=PG&f=1",
+        "display_name": "TSR",
+        "link": "https://stackoverflow.com/users/6727914/tsr"
+      },
+      "is_answered": false,
+      "view_count": 2,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746547,
+      "creation_date": 1564746547,
+      "question_id": 57325927,
+      "link": "https://stackoverflow.com/questions/57325927/is-it-possible-to-extends-a-class-but-not-its-superclass",
+      "title": "Is it possible to extends a class but not its superclass",
+      "body": "<p>I have a class Foo that extends Clickable.</p>\n\n<p>Is it possible to create a class Bar to inherits all the properties of Foo but not Clickable?</p>\n\n<p>If not, is there a workaround? </p>\n\n<pre><code>class Clickable{\n    click(){\n        console.log('clicked')\n    }\n}\nclass Foo extends Clickable{\n    fooTitle:string;\n    fooDuration:string;\n}\nclass Baz extends Clickable{\n    bazColor:string;    \n}\nclass BarExtendsFooButIsNotClickable extends Foo{\n    barAge:number;\n}\n</code></pre>\n"
+    },
+    {
+      "tags": [
+        "java",
+        "android",
+        "firebase",
+        "firebase-realtime-database"
+      ],
+      "owner": {
+        "reputation": 309,
+        "user_id": 7780102,
+        "user_type": "registered",
+        "profile_image": "https://lh6.googleusercontent.com/-5m76mUpjKl8/AAAAAAAAAAI/AAAAAAAAAAo/eJDzYmeFs_c/photo.jpg?sz=128",
+        "display_name": "Digvijay",
+        "link": "https://stackoverflow.com/users/7780102/digvijay"
+      },
+      "is_answered": true,
+      "view_count": 20,
+      "answer_count": 2,
+      "score": 1,
+      "last_activity_date": 1564746542,
+      "creation_date": 1564745786,
+      "last_edit_date": 1564746542,
+      "question_id": 57325742,
+      "link": "https://stackoverflow.com/questions/57325742/unable-to-get-list-of-cities-from-firebase",
+      "title": "Unable to get list of cities from firebase",
+      "body": "<p>I am trying to get list of cities from Firebase and showing in spinner. But I am getting following error below:</p>\n\n<blockquote>\n  <p>com.google.firebase.database.DatabaseException: Can't convert object of type java.lang.String to type Models.FirebaseCityModel</p>\n</blockquote>\n\n<p>Database structure:</p>\n\n<p><a href=\"https://i.stack.imgur.com/YPugf.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/YPugf.png\" alt=\"enter image description here\"></a></p>\n\n<p>Below is my code:</p>\n\n<pre><code> dRef.child(\"Cities\").addValueEventListener(new ValueEventListener() {\n        @Override\n        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\n\n            List&lt;FirebaseCityModel&gt; cities = new ArrayList&lt;&gt;();\n\n            for(DataSnapshot areaSnapshot:dataSnapshot.getChildren()){\n                FirebaseCityModel areaName = areaSnapshot.child(\"city\").getValue(FirebaseCityModel.class);\n                cities.add(areaName);\n            }\n            ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;String&gt;(MainActivity.this,R.layout.spinner_city,\n                    R.id.locaions,list);\n\n            chooseLocation.setAdapter(adapter);\n        }\n\n        @Override\n        public void onCancelled(@NonNull DatabaseError databaseError) {\n\n            TastyToast.makeText(getApplicationContext(),\"Unable to fetch locations\",TastyToast.LENGTH_SHORT,TastyToast.ERROR).show();\n        }\n    });\n</code></pre>\n\n<p>Someone please let me know what I am doing wrong. Any help would be appreciated.</p>\n\n<p><strong>THANKS</strong></p>\n"
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery"
+      ],
+      "owner": {
+        "reputation": 697,
+        "user_id": 82854,
+        "user_type": "registered",
+        "accept_rate": 100,
+        "profile_image": "https://www.gravatar.com/avatar/45509e07d8ad7abef901b87cb55a5f84?s=128&d=identicon&r=PG",
+        "display_name": "Nick ",
+        "link": "https://stackoverflow.com/users/82854/nick"
+      },
+      "is_answered": true,
+      "view_count": 383564,
+      "accepted_answer_id": 13418999,
+      "answer_count": 7,
+      "score": 131,
+      "last_activity_date": 1564746541,
+      "creation_date": 1353077497,
+      "last_edit_date": 1448797152,
+      "question_id": 13418963,
+      "link": "https://stackoverflow.com/questions/13418963/jquery-onchange-function-not-triggering-for-dynamically-created-inputs",
+      "title": "jQuery .on(&#39;change&#39;, function() {} not triggering for dynamically created inputs",
+      "body": "<p>The problem is that I have some dynamically created sets of input tags and I also have a function that is meant to trigger any time an input value is changed. </p>\n\n<pre><code>$('input').on('change', function() {\n  // Does some stuff and logs the event to the console\n});\n</code></pre>\n\n<p>However the <code>.on('change')</code> is not triggering for any dynamically created inputs, only for items that were present when the page was loaded. Unfortunately this leaves me in a bit of a bind as <code>.on</code> is meant to be the replacement for <code>.live()</code> and <code>.delegate()</code> all of which are wrappers for <code>.bind()</code> :/</p>\n\n<p>Has anyone else had this problem or know of a solution?</p>\n"
+    },
+    {
+      "tags": [
+        "java",
+        "android",
+        "go",
+        "gomobile"
+      ],
+      "owner": {
+        "reputation": 1005,
+        "user_id": 3909621,
+        "user_type": "registered",
+        "accept_rate": 92,
+        "profile_image": "https://i.stack.imgur.com/VKBPe.jpg?s=128&g=1",
+        "display_name": "Nicolas Charvoz",
+        "link": "https://stackoverflow.com/users/3909621/nicolas-charvoz"
+      },
+      "is_answered": false,
+      "view_count": 2,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746540,
+      "creation_date": 1564746540,
+      "question_id": 57325926,
+      "link": "https://stackoverflow.com/questions/57325926/android-framework-cannot-compile-with-gomobile-bind",
+      "title": "Android Framework cannot compile with gomobile bind",
+      "body": "<p>We are currently facing a compilation issue when we try to compile an AAR version of our framework with <code>gomobile bind</code> . \nIt's binding fine with the iOS Framework. </p>\n\n<p>Here is the error we get : </p>\n\n<pre><code>$ make build_android\n\ncd ./gomobile/logger &amp;&amp; gomobile bind -o ../build/logger.aar -target=android . ../levelenum ../remotelogger ../apiclient ../userproperties\n\ngomobile: javac -d /var/folders/p6/vvxrsdbj1bg87kkgk3k77cn40000gp/T/gomobile-work-357624003/javac-output -source 1.7 -target 1.7 -bootclasspath /Users/robin/Library/Android/sdk/platforms/android-29/android.jar apiclient/Apiclient.java apiclient/AuthenticationArgs.java apiclient/PostArgs.java go/Seq.java go/Universe.java go/error.java levelenum/Level.java levelenum/Levelenum.java logger/Logger.java logger/Logger_.java remotelogger/Remotelogger.java userproperties/ApplicationProperties.java userproperties/CarrierProperties.java userproperties/DeviceProperties.java userproperties/NetworkProperties.java userproperties/OSProperties.java userproperties/Userproperties.java failed: exit status 1\napiclient/Apiclient.java:12: error: class APIClient is public, should be declared in a file named APIClient.java\npublic final class APIClient implements Seq.Proxy {\n             ^\nremotelogger/Remotelogger.java:12: error: class RemoteLogger is public, should be declared in a file named RemoteLogger.java\npublic final class RemoteLogger implements Seq.Proxy {\n             ^\nuserproperties/Userproperties.java:12: error: class UserProperties is public, should be declared in a file named UserProperties.java\npublic final class UserProperties implements Seq.Proxy {\n             ^\n./apiclient/Apiclient.java:12: error: class APIClient is public, should be declared in a file named APIClient.java\npublic final class APIClient implements Seq.Proxy {\n             ^\napiclient/Apiclient.java:13: error: cannot access Apiclient\n        static { Apiclient.touch(); }\n                 ^\n  bad source file: ./apiclient/Apiclient.java\n    file does not contain class apiclient.Apiclient\n    Please remove or make sure it appears in the correct subdirectory of the sourcepath.\n5 errors\n\nmake: *** [build_android] Error 1\n</code></pre>\n\n<p>For instance our APIClient.go file looks like this : </p>\n\n<pre><code>package apiclient\n\nimport (\n    \"bytes\"\n    \"fmt\"\n    \"io/ioutil\"\n    \"log\"\n    \"net/http\"\n    \"time\"\n)\n\n// APIClient : handler of the Network request\ntype APIClient struct {\n    BaseURL string\n}\n</code></pre>\n\n<p>And the folder structure is : </p>\n\n<pre><code>gomobile/\n    Makefile\n    go.mod\n    go.sum\n    build/\n        logger.framework (iOS)\n        logger.aar (Android) &lt;---- Should be here but cannot be built\n    apiclient/\n        apiclient.go\n    logger/\n        logger.go\n    userproperties/\n        userproperties.go\n</code></pre>\n"
+    },
+    {
+      "tags": [
+        "c#",
+        "windows",
+        "memory",
+        "offset"
+      ],
+      "owner": {
+        "reputation": 13,
+        "user_id": 10699450,
+        "user_type": "registered",
+        "profile_image": "https://lh6.googleusercontent.com/-oypSQx5zfG8/AAAAAAAAAAI/AAAAAAAAAAA/AGDgw-jhnaSj9qZ5xxwhVYwYAl-EleOPzA/mo/photo.jpg?sz=128",
+        "display_name": "Brian Engel",
+        "link": "https://stackoverflow.com/users/10699450/brian-engel"
+      },
+      "is_answered": false,
+      "view_count": 10,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746538,
+      "creation_date": 1564745026,
+      "last_edit_date": 1564746538,
+      "question_id": 57325533,
+      "link": "https://stackoverflow.com/questions/57325533/how-to-find-my-static-adress-from-cheatengine-in-c-with-memory-functions",
+      "title": "How to find my static adress from CheatEngine in c# with Memory functions",
+      "body": "<p>So i figured out a static adress of my ping in teamspeak 3 with cheat engine.\nThe adress is \"Qt5Gui.dll\"+005F2E58 so module Qt5Gui.dll + offset of 0x005F2E58</p>\n\n<p>With Cheat Engine its not problem to get the ping value after restarting the application.</p>\n\n<p>Now i tried to find this adress in c# using memory functions but im not getting my adress.</p>\n\n<p>The Wanted Adress is: 16CE3AB92E40549592\nMy Programm gets me: 14072403</p>\n\n<p>How to find the right adress like in cheat engine?</p>\n\n<p>My getModule function:</p>\n\n<pre><code> static IntPtr getModule(String processName, String moduleName)\n        {\n            Process[] ProcessList = Process.GetProcessesByName(processName);\n            IntPtr BaseAddress = IntPtr.Zero;\n\n            if (ProcessList.Length &gt; 0)\n            {\n                Process process = ProcessList[0];\n\n                foreach (System.Diagnostics.ProcessModule Module in process.Modules)\n                {\n                    if (Module.ModuleName.Contains(moduleName))\n                    {\n                        BaseAddress = Module.BaseAddress;\n                        break;\n                    }\n\n                }\n\n            }\n\n            return BaseAddress;\n        }\n\n\n</code></pre>\n\n<p>Main Function:</p>\n\n<pre><code>String process = \"ts3client_win64\";\n\nIntPtr handle = getProcessHandle(process);\n\nif (!handle.Equals(new IntPtr(1337)))\n    {\n      IntPtr qtGui = getModule(process, \"Qt5Gui.dll\");\n      int pingOffset = 0x005F2E58;\n      IntPtr pingAdress = IntPtr.Add(qtGui, pingOffset);\n\n      Int64 finalPingAdress = pingAdress.ToInt64();\n\n      MessageBox.Show(\"Ping Adress: \" + finalPingAdress);\n     }\n     else\n     {\n        MessageBox.Show(\"Process Not Found!\");\n     }\n\n\n</code></pre>\n\n<p><a href=\"https://i.stack.imgur.com/FRPYC.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/FRPYC.png\" alt=\"Image of CheatEngine + my tool\"></a></p>\n"
+    },
+    {
+      "tags": [
+        "c#",
+        "validation",
+        "ssl-certificate",
+        "asp.net-web-api2",
+        "dotnet-httpclient"
+      ],
+      "owner": {
+        "reputation": 337,
+        "user_id": 57416,
+        "user_type": "registered",
+        "accept_rate": 46,
+        "profile_image": "https://i.stack.imgur.com/iRWu2.jpg?s=128&g=1",
+        "display_name": "Muhammedh",
+        "link": "https://stackoverflow.com/users/57416/muhammedh"
+      },
+      "is_answered": false,
+      "view_count": 16,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746535,
+      "creation_date": 1564744085,
+      "last_edit_date": 1564746535,
+      "question_id": 57325289,
+      "link": "https://stackoverflow.com/questions/57325289/ssl-tls-certificate-validation-related-issue-when-calling-web-api-method-in-c-w",
+      "title": "SSL/TLS Certificate validation related issue when calling Web API method in C# Website",
+      "body": "<p>I am facing an issue with consuming my locally hosted Web API from my web site. The API works perfectly via Swagger.</p>\n\n<p><strong>The exceptions I got:</strong></p>\n\n<p>\"The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel.\"</p>\n\n<p>\"The remote certificate is invalid according to the validation procedure.\"</p>\n\n<p><strong>Code:</strong>\n<a href=\"https://i.stack.imgur.com/4D8y3.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/4D8y3.png\" alt=\"enter image description here\"></a></p>\n\n<p>I am on Windows 10 with .Net Fx 4.8</p>\n\n<p><strong>PS:</strong> I do not want to bypass the validation using the following code:</p>\n\n<pre><code>ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) =&gt; true;\n</code></pre>\n\n<p>I am guessing some sort of configuration change is what I need to do. </p>\n\n<p><strong>Edit 1:</strong></p>\n\n<p>Here's my Postman output:</p>\n\n<p><a href=\"https://i.stack.imgur.com/aXa7G.png\" rel=\"nofollow noreferrer\"><img src=\"https://i.stack.imgur.com/aXa7G.png\" alt=\"enter image description here\"></a></p>\n\n<p>Help Please :)</p>\n"
+    },
+    {
+      "tags": [
+        "javascript"
+      ],
+      "owner": {
+        "reputation": 302,
+        "user_id": 9514156,
+        "user_type": "registered",
+        "profile_image": "https://lh4.googleusercontent.com/-66vQMgOUbuw/AAAAAAAAAAI/AAAAAAAABnI/Im71EjDp9a4/photo.jpg?sz=128",
+        "display_name": "Rahul Gurung",
+        "link": "https://stackoverflow.com/users/9514156/rahul-gurung"
+      },
+      "is_answered": false,
+      "view_count": 9,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746534,
+      "creation_date": 1564746534,
+      "question_id": 57325925,
+      "link": "https://stackoverflow.com/questions/57325925/string-trim-what-does-this-explamation-mark-do-here",
+      "title": "string!.trim() - what does this ( ! ) explamation mark do here?",
+      "body": "<p>What is the role of ! in this javascript equation?  </p>\n\n<pre><code>let data = 'hello : world';\ndata = data!.trim();  \n</code></pre>\n\n<p>I tried looking into the internet and wasn't able to find any satisfactory solution. Trying this in local browser return nothing.</p>\n"
+    },
+    {
+      "tags": [
+        "pgadmin"
+      ],
+      "owner": {
+        "reputation": 1,
+        "user_id": 11873937,
+        "user_type": "registered",
+        "profile_image": "https://www.gravatar.com/avatar/c2b60794b46489c2b65b2b1741542e34?s=128&d=identicon&r=PG&f=1",
+        "display_name": "piknik",
+        "link": "https://stackoverflow.com/users/11873937/piknik"
+      },
+      "is_answered": false,
+      "view_count": 2,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746531,
+      "creation_date": 1564746531,
+      "question_id": 57325924,
+      "link": "https://stackoverflow.com/questions/57325924/how-to-use-a-division-in-a-subquery-that-uses-a-join",
+      "title": "How to use a division in a subquery that uses a join?",
+      "body": "<p>I'm trying to create a summary table from 2 other tables, for that I'm using subqueries, it works quite well except for when i try to divide those two tables.</p>\n\n<p>The problem is that the second subquery only shows one result in every row, I want the result that is different for every row</p>\n\n<p>How can I make sure to display the right result?</p>\n\n<p>I'm trying the queries on PGAdmin, it works when I Group by separately but I cannot group by in one subquery.</p>\n\n<p>select</p>\n\n<p>travail_sig.depenses_sage.id_sage,</p>\n\n<p>(select round(sum(montant),0) as \"Budget AV\"\nfrom\ntravail_sig.pdm_1621\nwhere code_action='AGR0703' AND travail_sig.depenses_sage.id_sage=travail_sig.pdm_1621.id_sage),</p>\n\n<p>(select nullif(round(sum(travaux_finances)*100/sum(montant),1),0) as \"avancement AV\"\nfrom \ntravail_sig.depenses_sage\njoin\ntravail_sig.pdm_1621 \non travail_sig.depenses_sage.id_sage=travail_sig.pdm_1621.id_sage\nwhere travail_sig.depenses_sage.code_action='AGR0703' AND travail_sig.depenses_sage.id_sage=travail_sig.pdm_1621.id_sage)</p>\n\n<p>from \ntravail_sig.depenses_sage\njoin\ntravail_sig.pdm_1621 on travail_sig.depenses_sage.id_sage=travail_sig.pdm_1621.id_sage\ngroup by travail_sig.depenses_sage.id_sage</p>\n\n<p>The problem is that the second subquery only shows one result in every row, I want the result that is different for every row</p>\n\n<p>I expect the results to be different, right now I suppose it is dividing the total sum for everything, not separately</p>\n"
+    },
+    {
+      "tags": [
+        "angular",
+        "material-design"
+      ],
+      "owner": {
+        "reputation": 1,
+        "user_id": 11259049,
+        "user_type": "registered",
+        "profile_image": "https://lh6.googleusercontent.com/-rtdYKBtVhUg/AAAAAAAAAAI/AAAAAAAABuY/NlIPdct_pkA/photo.jpg?sz=128",
+        "display_name": "ahamed kalifa",
+        "link": "https://stackoverflow.com/users/11259049/ahamed-kalifa"
+      },
+      "is_answered": false,
+      "view_count": 10,
+      "answer_count": 1,
+      "score": -3,
+      "last_activity_date": 1564746529,
+      "creation_date": 1564745940,
+      "question_id": 57325780,
+      "link": "https://stackoverflow.com/questions/57325780/how-to-angular-7-material-design-using-responsive-layout",
+      "title": "How to Angular 7 Material design using responsive layout?",
+      "body": "<p>I am using a angular 7 material design but column spread in desktop but responsive no idea. Any body explain for responsive layout</p>\n"
+    },
+    {
+      "tags": [
+        "java",
+        "spring",
+        "spring-boot",
+        "jax-rs"
+      ],
+      "owner": {
+        "reputation": 2133,
+        "user_id": 2794446,
+        "user_type": "registered",
+        "accept_rate": 75,
+        "profile_image": "https://www.gravatar.com/avatar/890671b1bb90833ad977ca237a42f587?s=128&d=identicon&r=PG&f=1",
+        "display_name": "masterdany88",
+        "link": "https://stackoverflow.com/users/2794446/masterdany88"
+      },
+      "is_answered": false,
+      "view_count": 2,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1564746528,
+      "creation_date": 1564746528,
+      "question_id": 57325922,
+      "link": "https://stackoverflow.com/questions/57325922/how-to-serve-html-page-and-jaxrs-in-one-spring-boot-application",
+      "title": "How to serve html page and jaxrs in one spring boot application?",
+      "body": "<p>I would like to have jaxrs endpoint in spring boot app.\nOn the same server I would like to have html page that servers RichInternetApplication with single page.</p>\n\n<p>Is such configuration is possible?\nI am trying, but it seems they work to exclude each other.</p>\n\n<p>My mvn home controller:</p>\n\n<pre><code>@RestController\npublic class HomeContoller {\n    @RequestMapping(\"/\")\n    public String index() {\n        return \"index\";\n    }\n}\n</code></pre>\n\n<p>and jaxrs conf:</p>\n\n<pre><code>@Configuration\npublic class JerseyConfig extends ResourceConfig {\n\n    public JerseyConfig() {\n        // scan the resources package for our resources\n        packages(getClass().getPackage().getName() + \".resources\");\n    }\n}\n</code></pre>\n\n<p>And jaxrs endpoint</p>\n\n<pre><code>@Path(\"/\") public interface Api {\n    @GET @Path(\"ping\") Response ping();\n}\n\n</code></pre>\n\n<pre><code>@Component\n@Scope(\"request\")\npublic class ApiController extends Application implements Api {\n    @Override public Response ping() {\n        return Response.ok(\"pong\").build();\n    }\n}\n</code></pre>\n\n<p>Please help</p>\n"
+    }
+  ]
+  }
